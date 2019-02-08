@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core">
+<f:view
+	beforePhase="#{navigation_controller.redirectIfInvalidPatient()}" />
+<h:body>
+	<ui:composition template="/iTrust_template.xhtml">
+		<ui:define name="pageTitle">iTrust - Edit Fitness Records</ui:define>
+		<ui:define name="leftMenu">
+			<ui:include src="/auth/hcp/menu.xhtml" />
+		</ui:define>
+		<ui:define name="mainContent">
+		<h:message for="" id="fitnessinfo-message" class="iTrustError" />
+		<h3>View/Edit Fitness Data</h3>
+			<h:form id="basic_fh_edit_form">
+				<div class="form-group">
+					<h:outputLabel>Date:</h:outputLabel>
+					<h:outputText value="#{fitness_controller.dateString}" id="fhdate"></h:outputText>
+				</div>
+				<div class="form-group">
+					<h:outputLabel for="fhcaloriesBurned">Calories Burned:</h:outputLabel>
+					<h:inputTextarea value="#{fitness_form.calBurned}" cols="10"
+						rows="1" class="form-control inline" id="fhcaloriesBurned"></h:inputTextarea>
+				</div>
+				<div class="form-group">
+					<h:outputLabel for="fhsteps">Steps:</h:outputLabel>
+					<h:inputTextarea value="#{fitness_form.steps}" cols="10" rows="1"
+						class="form-control inline" id="fhsteps"></h:inputTextarea>
+				</div>
+				<div class="form-group">
+					<h:outputLabel for="fhdistance">Distance (miles):</h:outputLabel>
+					<h:inputTextarea value="#{fitness_form.distance}" cols="10"
+						rows="1" class="form-control inline" id="fhdistance"></h:inputTextarea>
+				</div>
+				<div class="form-group">
+					<h:outputLabel for="fhfloors">Floors:</h:outputLabel>
+					<h:inputTextarea value="#{fitness_form.floors}" cols="10" rows="1"
+						class="form-control inline" id="fhfloors"></h:inputTextarea>
+				</div>
+				<div class="form-group">
+					<h:outputLabel for="fhminSedentary">Minutes Sedentary:</h:outputLabel>
+					<h:inputTextarea value="#{fitness_form.minSedentary}" cols="10"
+						rows="1" class="form-control inline" id="fhminSedentary"></h:inputTextarea>
+				</div>
+				<div class="form-group">
+					<h:outputLabel for="fhminLightlyActive">Minutes Lightly Active:</h:outputLabel>
+					<h:inputTextarea value="#{fitness_form.minLight}" cols="10"
+						rows="1" class="form-control inline" id="fhminLightlyActive"></h:inputTextarea>
+				</div>
+				<div class="form-group">
+					<h:outputLabel for="fhminFairlyActive">Minutes Fairly Active:</h:outputLabel>
+					<h:inputTextarea value="#{fitness_form.minFair}" cols="10" rows="1"
+						class="form-control inline" id="fhminFairlyActive"></h:inputTextarea>
+				</div>
+				<div class="form-group">
+					<h:outputLabel for="fhminVeryActive">Minutes Very Active:</h:outputLabel>
+					<h:inputTextarea value="#{fitness_form.minVery}" cols="10" rows="1"
+						class="form-control inline" id="fhminVeryActive"></h:inputTextarea>
+				</div>
+				<div class="form-group">
+					<h:outputLabel for="fhactivityCalories">Activity Calories:</h:outputLabel>
+					<h:inputTextarea value="#{fitness_form.actCal}" cols="10" rows="1"
+						class="form-control inline" id="fhactivityCalories"></h:inputTextarea>
+				</div>
+				<div class="form-group">
+					<h:outputLabel for="fhlowHR">Lowest Heart Rate:</h:outputLabel>
+					<h:inputTextarea value="#{fitness_form.lowHR}" cols="10" rows="1"
+						class="form-control inline" id="fhlowHR"></h:inputTextarea>
+				</div>
+				<div class="form-group  form-button-group">
+					<h:commandButton id="submitVisitButton" value="Confirm"
+						action="#{fitness_form.submit}" />
+					<h:commandButton id="cancelVisitButton" value="Cancel"
+						action="#{navigation_controller.baseFitnessHealth}"
+						immediate="true" />
+				</div>
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

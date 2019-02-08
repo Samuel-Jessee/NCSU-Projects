@@ -1,0 +1,154 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:itrust="/WEB-INF/tags.tld">
+<title>Summary Reports</title>
+<h:body>
+	<ui:composition template="/iTrust_template.xhtml">
+		<ui:define name="pageTitle">iTrust - View Summary Reports</ui:define> <!-- clickable sidebar  -->
+		<ui:define name="leftMenu">
+			<ui:include src="/auth/hcp/menu.xhtml" /> <!--  original was auth/patient/menu.jsp -->
+		</ui:define>
+		<ui:define name="mainContent">
+			<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> </link>
+			<link rel="stylesheet" href="/resources/demos/style.css"> </link>
+			<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+			<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+			<script>
+			$(document).ready(function() {
+				  $(".datepicker").datepicker({
+				    onSelect: function() {
+				    	$('#data').text(this.value);
+				    }
+				    })
+				});
+			</script>
+			<div align="center">
+        		<h:message for="" class="iTrustError" />
+			<br />
+			<h2 style="font-size: 175%; font-weight: bold;">View Summary Reports</h2>
+			<br />
+			</div>
+			
+    <!-- Step Counts Chart actually displays a chart using Google Charts instead of High Charts.
+    Still need to implement date picking and connect that with getting appropriate data for date ranges.
+    Also need to put the datepicker under the graph -->	
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawStepCounts);
+      google.charts.setOnLoadCallback(drawStepDeltas);
+      google.charts.setOnLoadCallback(drawStepAverages);
+
+      function drawStepCounts() {
+        var data = google.visualization.arrayToDataTable([
+          ['Date', 'Step Counts'    ],
+          ['02/12/17',  1000,       ],
+          ['02/13/17',  1170,       ],
+          ['02/14/17',  660,        ],
+          ['02/15/17',  1030,       ]
+        ]);
+
+        var options = {
+          title: 'Step Counts',
+          curveType: 'function',
+          legend: { position: 'bottom' }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+        chart.draw(data, options);
+      }
+
+      function drawStepDeltas() {
+        var data = google.visualization.arrayToDataTable([
+          ['Date', 'Step Deltas'    ],
+          ['02/12/17',  1000,       ],
+          ['02/13/17',  1170,       ],
+          ['02/14/17',  660,        ],
+          ['02/15/17',  1030,       ]
+        ]);
+
+        var options = {
+          title: 'Step Deltas',
+          curveType: 'function',
+          legend: { position: 'bottom' }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('curve_chart2'));
+
+        chart.draw(data, options);
+      }
+      
+      function drawStepAverages() {
+          var data = google.visualization.arrayToDataTable([
+            ['Date', 'Step Deltas'    ],
+            ['02/12/17',  1000,       ],
+            ['02/13/17',  1170,       ],
+            ['02/14/17',  660,        ],
+            ['02/15/17',  1030,       ]
+          ]);
+
+          var options = {
+            title: 'Step Deltas',
+            curveType: 'function',
+            legend: { position: 'bottom' }
+          };
+
+          var chart = new google.visualization.LineChart(document.getElementById('curve_chart3'));
+
+          chart.draw(data, options);
+        }
+     
+    </script>	<!-- This is the end of the JavaScript code that makes the chart -->
+   	<!-- This is what makes the graph show up and displays the datepicker as well -->
+	<body>
+    	<div id="curve_chart" style="width: 700px; height: 300px"></div>
+    	<br />
+    	<div class="form-group">
+    		<div align="Left">
+    		    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+				<h:outputLabel value="Choose Start Date:   " />
+				<h:inputText styleClass="datepicker"/>
+				&nbsp;
+				<h:outputLabel value="Choose End Date:   " />
+				<h:inputText styleClass="datepicker"/>
+			</div>
+		</div>
+		
+    	<div id="curve_chart2" style="width: 700px; height: 300px"></div>
+    	<br />
+    	<div class="form-group">
+    		<div align="Left">
+    		    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+				<h:outputLabel value="Choose Start Date:   " />
+				<h:inputText styleClass="datepicker"/>
+				&nbsp;
+				<h:outputLabel value="Choose End Date:   " />
+				<h:inputText styleClass="datepicker"/>
+			</div>
+		</div>
+		
+		<div id="curve_chart3" style="width: 700px; height: 300px"></div>
+    	<br />
+		<div class="form-group">
+    		<div align="Left">
+    		    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+				<h:outputLabel value="Choose Start Date:   " />
+				<h:inputText styleClass="datepicker"/>
+				&nbsp;
+				<h:outputLabel value="Choose End Date:   " />
+				<h:inputText styleClass="datepicker"/>
+			</div>
+		</div>
+    </body>
+    
+  
+	</ui:define>
+	</ui:composition>
+	
+</h:body>
+</html>

@@ -1,0 +1,201 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:itrust="/WEB-INF/tags.tld">
+ <f:view beforePhase="#{navigation_controller.redirectIfInvalidPatient()}" />
+<h:body>
+	<ui:composition template = "/iTrust_template.xhtml">
+		<ui:define name = "pageTitle">Childbirth Visit</ui:define>
+		<ui:define name  = "leftMenu">
+			<ui:include src="/auth/hcp/menu.xhtml"/>
+		</ui:define>	
+		<ui:define name="mainContent">
+			<itrust:patientNav thisTitle="Childbirth Visit" />
+			<div align="center">
+			<br />
+				<h:messages for="" id="childbirthvisit-message" class="iTrustError" />
+				<h:message for="date" class="iTrustError" />
+			</div>
+			<c:choose>
+			<c:when test="#{obstentrics_initialization_controller.isOBGYN()}" >
+			<h:form enctype="multipart/form-data">
+			<c:choose>
+			<c:when test="#{childbirth_controller.isChildbirthAppointment()}" >
+
+				<div align="center">
+					<br />
+					<br />
+					<h2 style="font-size: 175%; font-weight: bold;">Patient Initialization Records</h2>
+					<h:dataTable id="previousVisits" styleClass="fTable" value="#{obstentrics_initialization_controller.getObstetricsInitializationForCurrentPatient()}" 
+						var="obsInit"  border="1">
+						<br/>
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Click to View"/>
+							</f:facet>
+						   <h:link outcome="obstetricsVisitView" value="Select">
+	      						 	<f:param name="visitID" value="#{obsInit.visitID}" />
+	      					</h:link>
+						</h:column>	
+	 					<h:column>
+							<f:facet name="header">
+								<h:outputText value="Date"/>
+							</f:facet>
+							<h:outputText value="#{obsInit.date}">
+								<f:converter converterId="localDateTimeConverter"/>
+							</h:outputText>
+						</h:column>	
+						<h:column>
+						<f:facet name="header">
+							<h:outputText value="Last Menstrual Period"/>
+						</f:facet>
+							<h:outputText id="lmp" value="#{obsInit.LMP}" >
+								<f:converter converterId="localDateConverter" />
+							</h:outputText>
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="Estimated Delivery Date"/>
+						</f:facet>
+							<h:outputText id="edd" value="#{obsInit.EDD}" >
+								<f:converter converterId="localDateConverter" />
+							</h:outputText>
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="Weeks Pregnant"/>
+						</f:facet>
+							<h:outputText id="weeksPreg" value="#{obsInit.weeksPreg}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="RH- Blood"/>
+						</f:facet>
+							<h:outputText id="RhNeg" value="#{obsInit.RH}" />
+					</h:column>	  
+					</h:dataTable>
+					<h2 style="font-size: 100%; font-style: italic;">To Return to This Page After Viewing Individual Record, Use Left Menu</h2>
+				</div>
+				<br />
+				<br />
+				
+				<h2 style="font-size: 175%; font-weight: bold;">Labor Information</h2>
+				<h:panelGrid id="panel0" class="fTable" columns="2" border="1" cellpadding="10" cellspacing="1">
+					<h:outputLabel for="prescheduled" value="Prescheduled Appointment? " />
+					<h:outputText id="prescheduled" value="#{childbirth_form.prescheduled}" />
+					<h:outputLabel for="prefMethod" value="Preferred Delivery Method: " />
+					<h:outputText id="prefMethod" value="#{childbirth_form.prefMethod}" />
+				</h:panelGrid>
+				
+				<h1 style="font-size: 100%; font-weight: bold;">Drugs Administered</h1>
+				<div class="table-responsive">
+				<h:panelGrid id="panel1" class="fTable" columns="2" border="1" cellpadding="10" cellspacing="1">
+					<h:outputLabel value="Pitocin"/>
+					<h:inputText id="pitocin" value="#{childbirth_form.pitocin}" 
+						onkeypress="if(event.which &lt; 48 || event.which &gt; 57) if(event.which != 46 &amp; event.which != 8) return false;" />
+					<h:outputLabel value="Nitrous Oxide"/>
+					<h:inputText id="nitrousOxide" value="#{childbirth_form.nitrousOxide}"
+						onkeypress="if(event.which &lt; 48 || event.which &gt; 57) if(event.which != 46 &amp; event.which != 8) return false;" />
+					<h:outputLabel value="Pethidine"/>
+					<h:inputText id="pethidine" value="#{childbirth_form.pethidine}"
+						onkeypress="if(event.which &lt; 48 || event.which &gt; 57) if(event.which != 46 &amp; event.which != 8) return false;" />
+					<h:outputLabel value="Epidural Anaesthesia"/>
+					<h:inputText id="epiduralAnaesthesia" value="#{childbirth_form.epiduralAnaesthesia}"
+						onkeypress="if(event.which &lt; 48 || event.which &gt; 57) if(event.which != 46 &amp; event.which != 8) return false;" />
+					<h:outputLabel value="Magnesium sulfate"/>
+					<h:inputText id="magnesiumSulfate" value="#{childbirth_form.magnesiumSulfate}"
+						onkeypress="if(event.which &lt; 48 || event.which &gt; 57) if(event.which != 46 &amp; event.which != 8) return false;" />
+					<h:outputLabel value="RH Immune Globulin"/>
+					<h:inputText id="rhimmuneglobulin" value="#{childbirth_form.rhimmuneglobulin}"
+						onkeypress="if(event.which &lt; 48 || event.which &gt; 57) if(event.which != 46 &amp; event.which != 8) return false;" />
+				</h:panelGrid>
+				</div>
+				<br/>
+				<br/>
+				<h2 style="font-size: 175%; font-weight: bold;">Delivery Information</h2>
+				<div class="table-responsive">
+				<h:panelGrid id="panel2" class="fTable" columns="2" border="1" cellpadding="10" cellspacing="1">
+					<h:outputLabel value="Date: " />
+					<h:inputText id="date" value="#{childbirth_form.date}" >
+						<f:converter converterId="localDateTimeConverter" />
+					</h:inputText>
+					<h:outputLabel for="method" value="Delivery Method" />
+					<h:selectOneMenu id="method" value="#{childbirth_form.method}"
+						class="selectpicker">
+						<f:selectItem itemValue="Vaginal Delivery" itemLabel="Vaginal Delivery" />
+						<f:selectItem itemValue="Vaginal Delivery Vacuum Assist" itemLabel="Vaginal Delivery Vacuum Assist" />
+						<f:selectItem itemValue="Vaginal Delivery Forceps Assist" itemLabel="Vaginal Delivery Forceps Assist" />
+						<f:selectItem itemValue="Caesarean Section" itemLabel="Caesarean Section" />
+						<f:selectItem itemValue="Miscarriage" itemLabel="Miscarriage" />
+					</h:selectOneMenu>
+					<h:outputLabel value="Hours In Labor " />
+					<h:inputText id="hoursInLabor" value="#{childbirth_form.hoursInLabor}" onkeypress="if(event.which &lt; 48 || event.which &gt; 57) if(event.which != 8) return false;" />
+				</h:panelGrid>
+				</div>
+				<h2 style="font-size: 175%; font-weight: bold;">Child Information</h2>
+				<h:dataTable id="childInfo" styleClass="fTable" value="#{childbirth_form.children}" 
+						var="child"  border="1">
+					<h:column>
+							<f:facet name="header">
+								<h:outputText value="Date of Birth" />
+							</f:facet>
+						   <h:inputText id="childdate" value="#{child.date}" >
+								<f:converter converterId="localDateTimeConverter" />
+						   </h:inputText>
+						   <h:message for="childdate" class="iTrustError" />
+					</h:column>
+					<h:column>
+							<f:facet name="header">
+								<h:outputText value="Approximate DOB?"/>
+							</f:facet>
+							<h:selectBooleanCheckbox value="#{child.approximate}" />
+					</h:column>
+					<h:column>
+							<f:facet name="header">
+								<h:outputText value="Sex"/>
+							</f:facet>
+						   <h:selectOneMenu id="sex" value="#{child.gender}"
+								class="selectpicker">
+							<f:selectItem itemValue="Male" itemLabel="Male" />
+							<f:selectItem itemValue="Female" itemLabel="Female" />
+				           </h:selectOneMenu>
+					</h:column>
+				</h:dataTable>
+				<h:commandButton id="addChild" class="btn btn-default"  value="Add Child" style="float: center" action="#{childbirth_form.addChild()}" />
+				<br/>
+				<div align="center">
+				<h:commandButton id="save" class="btn btn-default" disabled="#{childbirth_form.noBaby()}" value="Save Childbirth Visit" style="float: center" action="#{childbirth_form.submit}" />
+				</div>
+			
+			</c:when>
+			<c:otherwise>
+			<h2 style="font-size: 175%; font-weight: bold;">No Childbirth Appointment for Today</h2>
+			<h2 style="font-size: 175%; font-weight: bold;">In Case of Emergency Visit:</h2>
+			<h:outputLabel for="prefMethodCreate" value="Preferred Delivery Method" />
+					<h:selectOneMenu id="prefMethodCreate" value="#{childbirth_controller.prefMethod}"
+						class="selectpicker">
+						<f:selectItem itemValue="Childbirth,Vaginal Delivery" itemLabel="Vaginal Delivery" />
+						<f:selectItem itemValue="Childbirth,Vaginal Delivery Vacuum Assist" itemLabel="Vaginal Delivery Vacuum Assist" />
+						<f:selectItem itemValue="Childbirth,Vaginal Delivery Forceps Assist" itemLabel="Vaginal Delivery Forceps Assist" />
+						<f:selectItem itemValue="Childbirth,Caesarean Section" itemLabel="Caesarean Section" />
+						<f:selectItem itemValue="Childbirth,Miscarriage" itemLabel="Miscarriage" />
+					</h:selectOneMenu>
+			<br/>
+			<h:commandButton id="createEmergency" class="btn btn-default" value="Create Emergency Childbirth Visit" style="float: center" action="#{childbirth_controller.createEmergencyAppointment()}" />
+			</c:otherwise>
+			</c:choose>
+			</h:form>
+			</c:when>
+			<c:otherwise>
+				<h2 style="font-size: 175%; font-weight: bold;">Only HCPs with an OB/GYN Speciality can Document Childbirth Visits</h2>
+			</c:otherwise>
+			</c:choose>
+		</ui:define>
+	</ui:composition>
+</h:body>
+  
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core" 
+	xmlns:itrust="/WEB-INF/tags.tld">
+	
+
+<f:view
+	beforePhase="#{navigation_controller.redirectIfInvalidPatient()}" />
+<h:body>
+	<ui:composition template="/HTI_template.xhtml">
+		<ui:define name="pageTitle">iTrust - Health Tracking Info</ui:define>
+		<ui:define name="leftMenu">
+			<ui:include src="/auth/hcp/menu.xhtml" />
+		</ui:define>
+		<ui:define name="mainContent">
+			<div align="center">
+        		<h:message for="" class="iTrustError" />
+			<br />
+			<h2 style="font-size: 175%; font-weight: bold;">Health Tracking Info</h2>
+			<br />
+			</div>
+
+			<div align="center" >
+			<br />
+			
+			<h:form id="health_tracking_form">
+			
+			<div class="table-responsive">
+			<h:panelGrid id="panel" class="fTable" columns="2" border="1" cellpadding="10" cellspacing="1">
+				<h:outputLabel value="Choose Date:   " />
+				<p:calendar id="date" value="#{health_tracking_form.date}" pattern="MM/dd/yyyy" mode="popup">
+    				<p:ajax event="dateSelect" listener="#{health_tracking_form.dateSelectedAction}" update="caloriesBurned steps distance
+    					floors minutesSedentary minutesLightlyActive minutesFairlyActive minutesVeryActive activityCalories hrLowest hrHighest
+    					hrAverage activeHours uvExposure" ></p:ajax>
+				</p:calendar>
+				<h:outputLabel value="Calories Burned"/>
+				<h:inputText id="caloriesBurned" type="number" value="#{health_tracking_form.caloriesBurned}" style="display:block;width:500px" />
+				<h:outputLabel value="Steps Taken" />
+				<h:inputText id="steps" value="#{health_tracking_form.steps}" style="display:block;width:500px"/>
+				<h:outputLabel value="Miles Traveled" />
+				<h:inputText id="distance" value="#{health_tracking_form.distance}" style="display:block;width:500px"/>
+				<h:outputLabel value="Floors Traveled" />
+				<h:inputText id="floors" value="#{health_tracking_form.floors}" style="display:block;width:500px"/>
+				<h:outputLabel value="Minutes Sedentary" />
+				<h:inputText id="minutesSedentary" value="#{health_tracking_form.minutesSedentary}" style="display:block;width:500px"/>
+				<h:outputLabel value="Minutes Lightly Active" />
+				<h:inputText id="minutesLightlyActive" value="#{health_tracking_form.minutesLightlyActive}" style="display:block;width:500px"/>
+				<h:outputLabel value="Minutes Fairly Active" />
+				<h:inputText id="minutesFairlyActive" value="#{health_tracking_form.minutesFairlyActive}" style="display:block;width:500px"/>
+				<h:outputLabel value="Minutes Very Active" />
+				<h:inputText id="minutesVeryActive" value="#{health_tracking_form.minutesVeryActive}" style="display:block;width:500px"/>
+				<h:outputLabel value="Activity Calories" />
+				<h:inputText id="activityCalories" value="#{health_tracking_form.activityCalories}" style="display:block;width:500px"/>
+				<h:outputLabel value="Lowest Heartrate" />
+				<h:inputText id="hrLowest" value="#{health_tracking_form.hrLowest}" style="display:block;width:500px"/>
+				<h:outputLabel value="Highest Heartrate" />
+				<h:inputText id="hrHighest" value="#{health_tracking_form.hrHighest}" style="display:block;width:500px"/>
+				<h:outputLabel value="Average Heartrate" />
+				<h:inputText id="hrAverage" value="#{health_tracking_form.hrAverage}" style="display:block;width:500px"/>
+				<h:outputLabel value="Active Hours" />
+				<h:inputText id="activeHours" value="#{health_tracking_form.activeHours}" style="display:block;width:500px"/>
+				<h:outputLabel value="UV Exposure" />
+				<h:inputText id="uvExposure" value="#{health_tracking_form.uvExposure}" style="display:block;width:500px"/>
+			</h:panelGrid>
+			<br />
+			<h:commandButton class="btn btn-default" value="Save" style="float: center" action="#{health_tracking_form.submit}"/>
+			</div>
+			
+			<br />
+			 
+			<div class="form-group">
+				<h:outputLabel for="htimport">FitBit or MSBand File</h:outputLabel>
+				<h:inputText id="htimport" binding="#{input1}" style="display:block;width:500px"/>
+					<h:commandButton id="importButton" class="btn btn-default" value="Import"  action="#{health_tracking_form.importCSV(input1.value)}" />
+				<h:message for="htimport" class="iTrustError" />
+			</div>
+			</h:form>
+			<div class="form-group">
+				<li><a href="/iTrust/auth/hcp-patient/viewSummaryReports.xhtml">Create Summary Report</a></li>
+			</div>
+			</div>
+		
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>
+	

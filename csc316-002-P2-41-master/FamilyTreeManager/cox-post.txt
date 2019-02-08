@@ -1,0 +1,11 @@
+S J M
+R J F
+M J M
+A J M
+C J F
+W F M
+L F F
+M F F
+B F M
+T F F
+P C F

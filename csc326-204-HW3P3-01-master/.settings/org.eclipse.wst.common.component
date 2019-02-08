@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="csc326-204-HW3P3-01">
+        <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/iTrust/src/main"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/iTrust/src/test/java"/>
+        <property name="context-root" value="csc326-204-HW3P3-01"/>
+        <property name="java-output-path" value="/csc326-204-HW3P3-01/iTrust/target/classes"/>
+    </wb-module>
+</project-modules>

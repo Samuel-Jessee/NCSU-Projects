@@ -1,0 +1,7 @@
+I did not spell
+every word in this
+example rgiht.  Also,
+it contains a word
+or two that the
+spellchecker does not
+know.

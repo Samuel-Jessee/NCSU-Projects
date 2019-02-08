@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:itrust="/WEB-INF/tags.tld">
+ <f:view beforePhase="#{navigation_controller.redirectIfInvalidPatient()}" />
+<h:body>
+	<ui:composition template = "/iTrust_template.xhtml">
+		<ui:define name = "pageTitle">Obstetrics Office Visit</ui:define>
+		<ui:define name  = "leftMenu">
+			<ui:include src="/auth/hcp/menu.xhtml"/>
+		</ui:define>	
+		<ui:define name="mainContent">
+			<div align="center">
+			<br />
+				<h:message for=""/>
+			</div>
+			<c:choose>
+			<c:when test="#{obstetrics_office_visit_controller.isCurrentPatientValid()}" >
+			<c:choose>
+				<c:when test="#{obstetrics_office_visit_controller.isOBGYN()}">
+				<c:choose>
+					<c:when test="#{obstetrics_office_visit_controller.hasCurrentPatientVisited()}">
+					<div align="center">
+						<br />
+						<br />
+						<h2 style="font-size: 175%; font-weight: bold;">Select a previous visit to edit/view</h2>
+						<h:dataTable id="previousVisits" styleClass="fTable" value="#{obstetrics_office_visit_controller.getObstetricsVisitsForCurrentPatient()}" 
+							var="obov"  border="1">
+							<br/>
+							<h:column>
+								<f:facet name="header">
+									<h:outputText value="Click the Link"/>
+								</f:facet>
+						  	 <h:link outcome="obstetricsOfficeVisitEdit" value="Select">
+	      						 		<f:param name="visitID" value="#{obov.visitID}" />
+	   							</h:link>
+							</h:column>	
+	 						<h:column>
+								<f:facet name="header">
+									<h:outputText value="Date"/>
+								</f:facet>
+								<h:outputText value="#{obov.date}">
+									<f:converter converterId="dateConverter"/>
+								</h:outputText>
+							</h:column>	
+						</h:dataTable>	
+					</div>
+					<br />
+					<br />
+				</c:when>
+				<c:otherwise>
+					<br />
+					<br />
+					<div align="center">
+					<h2 style="font-size: 175%; font-weight: bold;">No Obstetrics Office Visits on Record for this Patient!</h2>
+					</div>
+					<br />
+					<br />
+				</c:otherwise>
+			</c:choose>
+			<div align="center">
+				<h:button style="font-size: 150%; font-weight: bold;" id="newVisitButton"
+						value="Click Here to Create a New Obstetrics Office Visit" outcome="obstetricsOfficeVisitCreate" />
+			</div>
+			</c:when>
+			<c:otherwise>
+				<br />
+				<br />
+				<div align="center">
+				<h2 style="font-size: 175%; font-weight: bold;">Only HCP's With an OB/GYN Speciality Can Create and Obstetrics Office Visit</h2>
+				<h:button style="font-size: 150%; font-weight: bold;" id="newRegVisitButton"
+						value="Click Here to Create a Standard Office Visit Instead" outcome="officeVisitInfo" />
+				</div>
+				<br />
+				<br />
+			</c:otherwise>
+		</c:choose>
+		</c:when>
+		<c:otherwise>
+		<h2 style="font-size: 175%; font-weight: bold;">Invalid Patient: Only Patients That Have an Initialization with an LMP Less Than 49 Weeks Ago are Valid </h2>
+		</c:otherwise>
+		</c:choose>
+		</ui:define>
+	</ui:composition>
+		
+
+</h:body>
+  
+</html>

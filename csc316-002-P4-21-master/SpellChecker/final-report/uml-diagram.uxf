@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="13.3">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>130</x>
+      <y>210</y>
+      <w>220</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+WordList
+--
+--
++add(word:String): void
++add(word:String, index:int): void
++addSorted(word:String): void
++get(index:int): String
++size(): int</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>120</x>
+      <y>180</y>
+      <w>250</w>
+      <h>470</h>
+    </coordinates>
+    <panel_attributes>edu.ncsu.csc316.spell_checker.list
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>390</x>
+      <y>130</y>
+      <w>220</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>edu.ncsu.csc316.spell_checker.ui
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>390</x>
+      <y>240</y>
+      <w>350</w>
+      <h>180</h>
+    </coordinates>
+    <panel_attributes>edu.ncsu.csc316.spell_checker.manager
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>390</x>
+      <y>440</y>
+      <w>300</w>
+      <h>210</h>
+    </coordinates>
+    <panel_attributes>edu.ncsu.csc316.spell_checker.rules
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>690</x>
+      <y>20</y>
+      <w>280</w>
+      <h>230</h>
+    </coordinates>
+    <panel_attributes>edu.ncsu.csc316.spell_checker.hash_table
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>760</x>
+      <y>280</y>
+      <w>310</w>
+      <h>450</h>
+    </coordinates>
+    <panel_attributes>edu.ncsu.csc316.spell_checker.counter
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>180</x>
+      <y>340</y>
+      <w>30</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>130</x>
+      <y>390</y>
+      <w>220</w>
+      <h>250</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;class&gt;&gt;
+ArrayBasedList
+--
+-capacity: int
+-list: String[]
+-size: int
+--
++ArrayBasedList()
++ArrayBasedList(capacity:int)
++add(word:String): void
++add(word:String, index:int): void
++addSorted(word:String): void
++get(index:int): String
+-resize(): void
++size(): int
++toString(): String</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>430</x>
+      <y>160</y>
+      <w>120</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;class&gt;&gt;
+SpellCheckerUI
+--
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>400</x>
+      <y>270</y>
+      <w>330</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>SpellCheckerManager
+--
+-hashTable: HashTable
+--
++SpellCheckerManager(dictionaryFileName:String)
++SpellCheckerManager(dictionary:WordList)
++getHashTable(): HashTable
++getInputText(inputFile:String): WordList
++spellCheck(inputText:WordList): WordList</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>340</x>
+      <y>280</y>
+      <w>80</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;60.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>540</x>
+      <y>180</y>
+      <w>160</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;140.0;10.0;140.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>400</x>
+      <y>470</y>
+      <w>280</w>
+      <h>170</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;class&gt;&gt;
+SimplificationRules
+--
+--
++removeAdverb(word:String): String
++removeCapitalization(word:String): String
++removePastTense(word:String): String
++removePlural(word:String): String
++removePossession(word:String): String
++removeTitle(word:String): String
++removeVerb(word:String): String</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>630</x>
+      <y>400</y>
+      <w>30</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>740</x>
+      <y>50</y>
+      <w>200</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;class&gt;&gt;
+HashTable
+--
+-dictionary: String[]
+-primeNumber: int
+-size: int
+--
++HashTable()
++get(index:int): String
++hashCode(word:String): int
++insert(word:String): void
++lookup(word:String): String</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>710</x>
+      <y>170</y>
+      <w>50</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;100.0;10.0;10.0;30.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>770</x>
+      <y>310</y>
+      <w>290</w>
+      <h>410</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;class&gt;&gt;
+Counter
+--
+-totalProbes: int
+-totalLookups: int
+-totalWordsChecked: int
+-totalMisspelled: int
+--
++&lt;&lt;static&gt;&gt; decrementLookups(): void
++&lt;&lt;static&gt;&gt; decrementMisspelled(): void
++&lt;&lt;static&gt;&gt; decrementProbes(): void
++&lt;&lt;static&gt;&gt; decrementWordsChecked(): void
++&lt;&lt;static&gt;&gt; incrementLookups(): void
++&lt;&lt;static&gt;&gt; incrementMisspelled(): void
++&lt;&lt;static&gt;&gt; incrementProbes(): void
++&lt;&lt;static&gt;&gt; incrementWordsChecked(): void
++&lt;&lt;static&gt;&gt; setTotalLookups(x:int): void
++&lt;&lt;static&gt;&gt; setTotalMisspelled(x:int): void
++&lt;&lt;static&gt;&gt; setTotalProbes(x:int): void
++&lt;&lt;static&gt;&gt; setTotalWordsChecked(x:int): void
++&lt;&lt;static&gt;&gt; totalLookups(): int
++&lt;&lt;static&gt;&gt; totalMisspelled(): int
++&lt;&lt;static&gt;&gt; totalProbes(): int
++&lt;&lt;static&gt;&gt; totalWordsChecked(): int
++&lt;&lt;static&gt;&gt; lookupProbes(): int
++&lt;&lt;static&gt;&gt; wordProbes(): int</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>930</x>
+      <y>210</y>
+      <w>130</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>110.0;100.0;110.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+</diagram>

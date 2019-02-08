@@ -1,0 +1,136 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:itrust="/WEB-INF/tags.tld">
+<f:view
+	beforePhase="#{navigation_controller.redirectIfInvalidPatient()}" />
+<h:body>
+	<ui:composition template="/iTrust_template.xhtml">
+		<ui:define name="pageTitle">Fitness Health</ui:define>
+		<ui:define name="leftMenu">
+			<ui:include src="/auth/hcp/menu.xhtml" />
+		</ui:define>
+		<ui:define name="mainContent">
+			<itrust:patientNav thisTitle="Fitness Health" />
+			<div align="center">
+				<br />
+				<h:message for="" />
+			</div>
+			<div align="center">
+				<h:button style="font-size: 120%; font-weight: bold;"
+					id="newVisitButton" value="Create a Summary Report"
+					outcome="viewFitnessSummaries.xhtml" />
+				<h2 style="font-size: 120%; font-weight: bold;">
+					<U>OR</U> <br /> <br /> Select a date to view Patient FitBit Data
+				</h2>
+			</div>
+			<div align="center">
+				<h:form>
+					<h2 style="font-size: 120%; font-weight: bold;">Date:</h2>
+					<h:selectOneMenu value="#{fitness_controller.month}" name="Month">
+						<f:selectItem itemValue="01" itemLabel="January" />
+						<f:selectItem itemValue="02" itemLabel="February" />
+						<f:selectItem itemValue="03" itemLabel="March" />
+						<f:selectItem itemValue="04" itemLabel="April" />
+						<f:selectItem itemValue="05" itemLabel="May" />
+						<f:selectItem itemValue="06" itemLabel="June" />
+						<f:selectItem itemValue="07" itemLabel="July" />
+						<f:selectItem itemValue="08" itemLabel="August" />
+						<f:selectItem itemValue="09" itemLabel="September" />
+						<f:selectItem itemValue="10" itemLabel="October" />
+						<f:selectItem itemValue="11" itemLabel="November" />
+						<f:selectItem itemValue="12" itemLabel="December" />
+					</h:selectOneMenu>
+					<h:selectOneMenu value="#{fitness_controller.day}" name="Day">
+						<f:selectItem itemValue="01" itemLabel="1" />
+						<f:selectItem itemValue="02" itemLabel="2" />
+						<f:selectItem itemValue="03" itemLabel="3" />
+						<f:selectItem itemValue="04" itemLabel="4" />
+						<f:selectItem itemValue="05" itemLabel="5" />
+						<f:selectItem itemValue="06" itemLabel="6" />
+						<f:selectItem itemValue="07" itemLabel="7" />
+						<f:selectItem itemValue="08" itemLabel="8" />
+						<f:selectItem itemValue="09" itemLabel="9" />
+						<f:selectItem itemValue="10" itemLabel="10" />
+						<f:selectItem itemValue="11" itemLabel="11" />
+						<f:selectItem itemValue="12" itemLabel="12" />
+						<f:selectItem itemValue="13" itemLabel="13" />
+						<f:selectItem itemValue="14" itemLabel="14" />
+						<f:selectItem itemValue="15" itemLabel="15" />
+						<f:selectItem itemValue="16" itemLabel="16" />
+						<f:selectItem itemValue="17" itemLabel="17" />
+						<f:selectItem itemValue="18" itemLabel="18" />
+						<f:selectItem itemValue="19" itemLabel="19" />
+						<f:selectItem itemValue="20" itemLabel="20" />
+						<f:selectItem itemValue="21" itemLabel="21" />
+						<f:selectItem itemValue="22" itemLabel="22" />
+						<f:selectItem itemValue="23" itemLabel="23" />
+						<f:selectItem itemValue="24" itemLabel="24" />
+						<f:selectItem itemValue="25" itemLabel="25" />
+						<f:selectItem itemValue="26" itemLabel="26" />
+						<f:selectItem itemValue="27" itemLabel="27" />
+						<f:selectItem itemValue="28" itemLabel="28" />
+						<f:selectItem itemValue="29" itemLabel="29" />
+						<f:selectItem itemValue="30" itemLabel="30" />
+						<f:selectItem itemValue="31" itemLabel="31" />
+					</h:selectOneMenu>
+					<h:selectOneMenu value="#{fitness_controller.year}" name="Year">
+						<f:selectItem itemValue="2005" itemLabel="2005" />
+						<f:selectItem itemValue="2006" itemLabel="2006" />
+						<f:selectItem itemValue="2007" itemLabel="2007" />
+						<f:selectItem itemValue="2008" itemLabel="2008" />
+						<f:selectItem itemValue="2009" itemLabel="2009" />
+						<f:selectItem itemValue="2010" itemLabel="2010" />
+						<f:selectItem itemValue="2011" itemLabel="2011" />
+						<f:selectItem itemValue="2012" itemLabel="2012" />
+						<f:selectItem itemValue="2013" itemLabel="2013" />
+						<f:selectItem itemValue="2014" itemLabel="2014" />
+						<f:selectItem itemValue="2015" itemLabel="2015" />
+						<f:selectItem itemValue="2016" itemLabel="2016" />
+						<f:selectItem itemValue="2017" itemLabel="2017" />
+						<f:selectItem itemValue="2018" itemLabel="2018" />
+						<f:selectItem itemValue="2019" itemLabel="2019" />
+						<f:selectItem itemValue="2020" itemLabel="2020" />
+						<f:selectItem itemValue="2021" itemLabel="2021" />
+						<f:selectItem itemValue="2022" itemLabel="2022" />
+						<f:selectItem itemValue="2023" itemLabel="2023" />
+						<f:selectItem itemValue="2024" itemLabel="2024" />
+						<f:selectItem itemValue="2025" itemLabel="2025" />
+						<f:selectItem itemValue="2026" itemLabel="2026" />
+						<f:selectItem itemValue="2027" itemLabel="2027" />
+						<f:selectItem itemValue="2028" itemLabel="2028" />
+						<f:selectItem itemValue="2029" itemLabel="2029" />
+						<f:selectItem itemValue="2030" itemLabel="2030" />
+					</h:selectOneMenu>
+					<br />
+					<br />
+					<h:commandButton value="Select this date"
+						action="#{fitness_controller.submitDate}"></h:commandButton>
+				</h:form>
+			</div>
+			<hr />
+			<h:form enctype="multipart/form-data">
+				<h:inputFile value="#{add_fitness_file.uploadedFile}">
+				</h:inputFile>
+				<h:commandButton value="Upload File"
+					action="#{add_fitness_file.upload}"></h:commandButton>
+			</h:form>
+		</ui:define>
+
+
+		<ui:define name="pageScripts">
+			<script>
+				$(function() {
+					window.sessionStorage.removeItem("currentTabId");
+				});
+			</script>
+		</ui:define>
+	</ui:composition>
+
+
+</h:body>
+
+</html>

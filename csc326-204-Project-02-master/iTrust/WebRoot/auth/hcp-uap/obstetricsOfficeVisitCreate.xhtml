@@ -1,0 +1,136 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:itrust="/WEB-INF/tags.tld"
+        xmlns:p="http://primefaces.org/ui">
+<h:body>
+	<ui:composition template = "/iTrust_template.xhtml">
+		<ui:define name = "pageTitle">New Obstetrics Office Visit</ui:define>
+		<ui:define name  = "leftMenu">
+			<ui:include src="/auth/hcp/menu.xhtml"/>
+		</ui:define>	
+		<ui:define name="mainContent">
+			<div align="center">
+        		<h:message for="" class="iTrustError" />
+			<br />
+			<h2 style="font-size: 175%; font-weight: bold;">New Obstetrics Office Visit</h2>
+			<br />
+			</div>
+
+			<div align="center" >
+			<br />
+			
+			<h:form enctype="multipart/form-data">
+			<div class="table-responsive">
+			<h:panelGrid id="panel1" class="fTable" columns="2" border="1" cellpadding="10" cellspacing="1">
+				<h:outputLabel value="Date: " />
+				<h:inputText id="date" value="#{obstetrics_office_visit_form.date}" style="display:block;width:500px" >
+					<f:converter converterId="dateConverter" />
+				</h:inputText>
+				
+				<h:outputLabel value="Number of Weeks Pregnant " />
+				<h:inputText id="weeksPreg" value="#{obstetrics_office_visit_form.numWeeks}" style="display:block;width:500px" />
+				<h:outputLabel value="Weight (lbs)" />
+				<h:inputText id="weight" value="#{obstetrics_office_visit_form.weight}" style="display:block;width:500px" />
+				<h:outputLabel value="Blood Pressure" />
+				<h:inputText id="bloodPressure" value="#{obstetrics_office_visit_form.bloodPressure}" style="display:block;width:500px" />
+				<h:outputLabel value="Fetal Heart Rate" />
+				<h:inputText id="fhr" value="#{obstetrics_office_visit_form.FHR}" style="display:block;width:500px" />
+				<h:outputLabel value="Number of Fetuses" />
+				<h:inputText id="numFetus" value="#{obstetrics_office_visit_form.numFetus}" style="display:block;width:500px" />
+				<h:outputLabel value="Low Lying Placenta" />
+				<h:selectBooleanCheckbox value="#{obstetrics_office_visit_form.lowLyingPlacenta}" />
+				<h:outputLabel value="High Genetic Miscarriage Potential?" />
+				<h:selectBooleanCheckbox value="#{obstetrics_office_visit_form.highGenetic}" />
+				<h:outputLabel value="Complications" />
+				<h:inputText id="complications" value="#{obstetrics_office_visit_form.complications}" style="display:block;width:500px" />
+				
+			</h:panelGrid>
+			</div>
+			<br />
+			<h:outputLabel value="If an Ultrasound is performed during the Office Visit, click here   " />
+			<br/>
+			<h:commandButton class="btn btn-default" disabled="#{obstetrics_office_visit_form.includeUltrasound}" value="Add Ultrasound" style="float: center" action="#{obstetrics_office_visit_form.addUltrasound}" />
+			<c:choose>
+				<c:when test="#{obstetrics_office_visit_form.isIncludeUltrasound()}">
+					<h2 style="font-size: 175%; font-weight: bold;">Ultrasound Image</h2>
+					<p:fileUpload id="uPicture" value="#{obstetrics_office_visit_form.picture}" mode="simple" skinSimple="true" />
+					<br/>
+					<h2 style="font-size: 175%; font-weight: bold;">Ultrasound Info</h2>
+					<h:dataTable id="ultInfo"  styleClass="fTable" value="#{obstetrics_office_visit_form.ultrasounds}" 
+							var="ult"  border="1">
+					<br/>
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="Fetus"/>
+						</f:facet>
+							<h:outputText value="#{obstetrics_office_visit_form.ultrasounds.indexOf(ult)+1}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="Crown Rump Length"/>
+						</f:facet>
+							<h:inputText id="crl" value="#{ult.CRL}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="Biparietal Diameter"/>
+						</f:facet>
+							<h:inputText id="bpd" value="#{ult.BPD}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="Head Circumference"/>
+						</f:facet>
+							<h:inputText id="hc" value="#{ult.HC}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="Femur Length"/>
+						</f:facet>
+							<h:inputText id="fl" value="#{ult.FL}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="Occipitofrontal Diameter"/>
+						</f:facet>
+							<h:inputText id="ofd" value="#{ult.OFD}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="Abdominal Circumference"/>
+						</f:facet>
+							<h:inputText id="ac" value="#{ult.AC}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="Humerus Length"/>
+						</f:facet>
+							<h:inputText id="hl" value="#{ult.HL}" />
+					</h:column>	
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="Estimated Fetal Weight"/>
+						</f:facet>
+							<h:inputText id="efw" value="#{ult.EFW}" />
+					</h:column>
+				</h:dataTable>	
+				</c:when>
+			</c:choose>
+			<br />
+			<h:outputLabel value="Click here to save Office Visit information, including ultrasound if added " />
+			<br/>
+			<h:commandButton class="btn btn-default" value="Save Office Visit" style="float: center" action="#{obstetrics_office_visit_form.submit}"
+								outcome="obstetricsOfficeVisit" />
+			</h:form>
+			</div>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>
+
+		

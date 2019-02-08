@@ -1,0 +1,3 @@
+2017-02-12 15:52:12,281 [Worker-21] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.maven.ide.eclipse.wtp.WarLifecycleMapping lifecycle mapping for MavenProject: iTrust:iTrust:23.0.0 @ C:\Users\louis\Documents\S17\CSC326\csc326-204-HW3P2-01\iTrust\pom.xml.
+2017-02-12 15:52:13,160 [Worker-21] WARN  o.e.m.c.i.embedder.EclipseLogger - The POM for milyn:sac:jar:1.3 is missing, no dependency information available
+2017-02-12 15:52:15,996 [Worker-21] WARN  o.e.m.c.i.embedder.EclipseLogger - The POM for milyn:sac:jar:1.3 is missing, no dependency information available
